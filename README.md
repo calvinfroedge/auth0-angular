@@ -157,7 +157,8 @@ auth.signin({}, function(profile, idToken, accessToken, state, refreshToken) {
 auth.signin({
   username: $scope.username,
   password: $scope.password,
-  connection: ['Username-Password-Authentication']
+  connection: ['Username-Password-Authentication'],
+  sso: true|false //Whether or not you want to enable sso. Set this to false to disable popup.
 }, function() {
   // All good
   $location.path('/');
@@ -165,6 +166,8 @@ auth.signin({
   // Error
 })
 ````
+
+**sso**: If you have more than one application and you want Single Sign On on your apps, just set this to `true`. This will mean that if a user signs in to app 1, when he tries to use app 2, he will be already logged in. Set to `false` to ensure no popup appears, and sso will be disabled.
 
 **If you don't set any success or failure callback and you don't set username and password as options**, redirect mode will be used, which means the Angular page is reloaded. You'll need to use `events` to handle the login success and failure:
 
@@ -338,7 +341,6 @@ You use this method to configure the auth service. It can be used either from th
 
 * **domain**: The domain you have from your Auth0 account.
 * **clientId**: The identifier for the application you've created. This can be found in the settings for your app on Auth0.
-* **sso**: If you have more than one application and you want Single Sign On on your apps, just set this to `true`. This will mean that if a user signs in to app 1, when he tries to use app 2, he will be already logged in.
 * **loginUrl**: Set this to the login url **if you're using ngRoute**.
 * **loginState**: Set this to the login state **if you're using ui-router**.
 
